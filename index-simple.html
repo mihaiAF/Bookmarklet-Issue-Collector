@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+
+        <h1>Testpage</h1>
+
+        <img src="img/Calendar.jpg" alt="">
+
+
+        <p>Bacon ipsum dolor amet venison sirloin pastrami bacon landjaeger filet mignon cupim. Meatloaf bacon jowl,
+            buffalo shank biltong ham hock. Pork sirloin doner chuck ribeye, ham salami tongue hamburger shankle jowl.
+            Drumstick rump cow, filet mignon pastrami porchetta pancetta hamburger capicola fatback pig bresaola
+            meatloaf alcatra. Kielbasa drumstick shoulder capicola, shankle shank salami ground round rump porchetta
+            ribeye turkey.</p>
+
+
+        <div id="canvas-holder" style="">
+
+        </div>
+
+
+        <!--Screenshot library (necessary)-->
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+
+        <script>
+
+                function screenshot() {
+                    html2canvas(document.body).then(canvas => {
+                        // document.body.appendChild(canvas)
+                        document.getElementById("canvas-holder").appendChild(canvas);
+                    });
+                };
+
+                function save2Image() {
+                    setTimeout(function () {
+                        var canvas = document.getElementsByTagName('canvas');
+                        var img = canvas[0].toDataURL('image/png', 1.0);
+                        console.log(img);
+                    }, 500);
+                }
+
+                function addForm() {
+
+                    // Modal Background
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    // add overlaz to body
+
+                    // add close button to overlay
+
+                    // add eventlistener to close button (when clicked remove overlay)
+
+                    // add form with submit button
+
+                    // add eventhandler for form submit
+
+                }
+
+
+                function submitForm() {
+
+
+
+                }
+
+                // init and run all the 💩💩💩
+                setTimeout(function () {
+                    screenshot();
+                    save2Image();
+                }, 500);
+
+        </script>
+
+    </body>
+</html>

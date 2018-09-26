@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+    </head>
+    <body>
+
+        <!--Screenshot library (necessary)-->
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+        <!--Main Script-->
+        <script>
+
+            document.write('<form action="#" method="POST" id="form1">' +
+                '<div style="background-color: #f9f9f9; display: flex; flex-direction: column; align-items: center; padding-top: 15px;">' +
+                '<span style="font-size: 18px; font-weight: bold; font-family: Helvetica; ">Short description of the issue </span>' + '</br>' +
+                '<input type="text" placeholder="Short title..." autofocus ' +
+                'style="padding: 5px 5px; border: 2px solid #ccc; border-radius: 3px; background-color: #f8f8f8; font-size: 15px; margin-top: 10px; width: 350px; ">' + '</br>' +
+
+                '<div style="padding-top: 15px; ">' +
+                '<span style="font-size: 18px; font-weight: bold; font-family: Helvetica; ">Please elaborate on the issue encountered to help us replicate it: </span>' + '</br>' +
+                '<textarea placeholder="Detailed description..." rows="15" cols="70" ' +
+                'style="resize: none; padding: 5px 5px; border: 2px solid #ccc; border-radius: 3px; background-color: #f8f8f8; font-size: 15px; margin: 10px 0; ">' +
+                '</textarea>' + '</br>' +
+                '</div>' +
+
+                '<button type="submit" form="form1" value="Submit" ' +
+                'style="background-color: #4CAF50; border: none; color: white; padding: 12px 25px; text-decoration: none; display: inline-block; font-size: 17px; cursor: pointer ">' +
+                'Submit</button>' +
+                '</form>');
+
+
+            // Use an EventListener here instead
+            document.write('<input type=\'button\' id=\'but_screenshot\' value=\'Take screenshot\' onclick=\'screenshot();\' ' +
+                'style="background-color: #008CBA; border: none; color: white; padding: 12px 25px; text-decoration: none; display: inline-block; font-size: 17px; margin-top: 15px; cursor: pointer "><br/>');
+
+
+            document.write('<p id="demo"></p>');
+
+
+            document.getElementById("demo").innerHTML = '<div style="font-family: Helvetica; font-size: 17px; ">' +
+                '<span style="margin: 10px 0; display: inline-block">The navigator appName is: </span>'  + ' ' + '<span style="background-color: #c3c3c3; padding: 5px 5px; border: 2px solid #A0A0A0; ">' + navigator.appName + '</span>' + "</br>" +
+                '<span style="margin: 10px 0; display: inline-block">Browser Version is: </span>'  + ' ' + '<span style="background-color: #c3c3c3; padding: 5px 5px; border: 2px solid #A0A0A0; ">' + navigator.appVersion + '</span>' + "</br>" +
+                '<span style="margin: 10px 0; display: inline-block">The Browser Platform is: </span>'  + ' ' + '<span style="background-color: #c3c3c3; padding: 5px 5px; border: 2px solid #A0A0A0; ">' + navigator.platform + '</span>' + "</br>" +
+                '<span style="margin: 10px 0; display: inline-block">The Browser Language is: </span>'  + ' ' + '<span style="background-color: #c3c3c3; padding: 5px 5px; border: 2px solid #A0A0A0; ">' + navigator.language + '</span>' + "</br>" +
+                '<span style="margin: 10px 0; display: inline-block">Browser online status is: </span>'  + ' ' + '<span style="background-color: #c3c3c3; padding: 5px 5px; border: 2px solid #A0A0A0; ">' + navigator.onLine + '</span>' + "</br>" +
+                '<span style="margin: 10px 0; display: inline-block">The total screen height and width are: </span>'  + ' ' + '<span style="background-color: #c3c3c3; padding: 5px 5px; border: 2px solid #A0A0A0; ">' + screen.width + " X " + screen.height + '</span>' + "</br>" +
+                '<span style="margin: 10px 0; display: inline-block">The browser screen height and width are: </span>'  + ' ' + '<span style="background-color: #c3c3c3; padding: 5px 5px; border: 2px solid #A0A0A0; ">' + window.innerWidth + " X " + window.innerHeight + '</span>' + "</br>";
+
+
+
+            document.write('<div style="font-family: Helvetica; font-size: 17px">' +
+                "The following cookies have been stored " + "<div style='overflow-wrap: break-word ; background: rgba(0, 165, 114, .3); margin: 10px 0; padding: 5px 5px; border: 2px solid rgba(63, 122, 77, .5);  '>" + document.cookie + "</div>" +
+                '</div>');
+
+
+
+            window.onerror = function(error, url, line) {
+                document.getElementById("demo").innerHTML +=
+                    "<div style='background: rgba(205, 92, 92, .6); border: 2px solid rgba(128, 0, 0, .7); padding: 5px 5px; font-family: Helvetica; font-size: 17px; '>"
+                    + '<p style="font-weight: bold">The following errors have been detected: </p>'
+                    + error + "<br>"
+                    + "<span style='font-weight: bold'>URL: </span>" + url + "<br>"
+                    + "<span style='font-weight: bold'> Line Number: </span>" +  line + "</div>";
+            };
+
+            thisDoesntExist;
+
+            function screenshot(){
+                html2canvas(document.body).then(canvas => {
+                    document.body.appendChild(canvas)
+                });
+            };
+
+            document.write('\'</div>\'');
+
+        </script>
+
+    </body>
+</html>
