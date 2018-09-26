@@ -3,6 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
+
+        <!--<style>-->
+        <!--.modal-wrapper {-->
+        <!--position: fixed;-->
+        <!--top: 0;-->
+        <!--left: 0;-->
+        <!--right: 0;-->
+        <!--bottom: 0;-->
+        <!--}-->
+
+        <!--.modal-background {-->
+        <!--position: absolute;-->
+        <!--width: 100%;-->
+        <!--height: 100%;-->
+        <!--opacity: .5;-->
+        <!--background: #000;-->
+        <!--}-->
+        <!--.modal-content {-->
+        <!--position: relative;-->
+        <!--}-->
+        <!--</style>-->
     </head>
     <body>
 
@@ -18,6 +39,14 @@
             ribeye turkey.</p>
 
 
+        <!--<div class="modal-wrapper">-->
+        <!--<div class="modal-background"></div>-->
+        <!--<div class="modal-content">-->
+        <!--<input >-->
+        <!--</div>-->
+        <!--</div>-->
+
+
         <div id="canvas-holder" style="">
 
         </div>
@@ -29,63 +58,140 @@
 
         <script>
 
-                function screenshot() {
-                    html2canvas(document.body).then(canvas => {
-                        // document.body.appendChild(canvas)
-                        document.getElementById("canvas-holder").appendChild(canvas);
-                    });
-                };
+            // declarce needed variables
+            var screenshotImage = null;
+            var message = {
+                title: '',
+                text: ''
+            };
+            var userAgentData = {
+                appName: navigator.appName,
+                appVersion: navigator.appVersion,
+                navigatorPlatform: navigator.platform,
+                navigatorLanguage: navigator.language,
+                onLine: navigator.onLine,
+                screenWidth: screen.width,
+                screenHeight: screen.height,
+                windowWidth: window.innerWidth,
+                windowHeight: window.innerHeight,
 
-                function save2Image() {
-                    setTimeout(function () {
-                        var canvas = document.getElementsByTagName('canvas');
-                        var img = canvas[0].toDataURL('image/png', 1.0);
-                        console.log(img);
-                    }, 500);
-                }
-
-                function addForm() {
-
-                    // Modal Background
-
-
+                cookies: document.cookie,
 
 
 
+            };
+
+            var errors = {
+                error: '',
+                url: '',
+                line: '',
+            };
 
 
 
+            // functions
+            function screenshot() {
+                html2canvas(document.body).then(canvas => {
+                    // document.body.appendChild(canvas)
+                    document.getElementById("canvas-holder").appendChild(canvas);
+                });
+            };
 
-
-
-
-
-
-
-
-                    // add overlaz to body
-
-                    // add close button to overlay
-
-                    // add eventlistener to close button (when clicked remove overlay)
-
-                    // add form with submit button
-
-                    // add eventhandler for form submit
-
-                }
-
-
-                function submitForm() {
-
-
-
-                }
-
-                // init and run all the 💩💩💩
+            function save2Image() {
                 setTimeout(function () {
-                    screenshot();
-                    save2Image();
+                    var canvas = document.getElementsByTagName('canvas');
+                    screenshotImage = canvas[0].toDataURL('image/png', 1.0);
+                }, 500);
+            }
+
+            function addForm() {
+
+                // Modal Background
+                var modal = document.createElement('div');
+                modal.style.cssText = 'position:fixed;width:100%;height:100%;min-height:100vh;top:0;left:0;z-index:100';
+                modal.id = "submit-form-modal"
+                document.body.appendChild(modal);
+
+                var modalBackground = document.createElement('div');
+                modalBackground.style.cssText = 'position: absolute; opacity: .5; background: #000; width: 100%; height: 100%';
+
+                // create close button and attach to modal
+                var btnClose = document.createElement('button');
+                btnClose.style.cssText = 'position: absolute; right: 15px; top:15px; z-index:100';
+                btnClose.innerHTML = `<div style="font-size: 30px; font-weight: bolder; color: #000; cursor: pointer; background: none;">X</div>`;
+                btnClose.id = "submit-form-close"
+                btnClose.onclick = function () {
+                    close();
+                };
+                document.getElementById("submit-form-modal").appendChild(btnClose);
+
+
+                // add form with submit button
+
+                var formWrapper = document.createElement('div');
+                formWrapper.id = "submit-form-wrappper";
+                formWrapper.style.cssText = 'position: relative; height: 100%; display: flex; justify-content: center; align-items: center;';
+
+                formWrapper.innerHTML = '<div style="background-color: #f9f9f9; display: flex; flex-direction: column; align-items: center; padding-top: 45px; padding-bottom: 45px; width: 50%;">' +
+                    '<form action="#" method="POST" id="form1">' +
+                    '<span style="font-size: 18px; font-weight: bold; font-family: Helvetica; ">Short description of the issue </span>' + '</br>' +
+                    '<input id="input-title" type="text" placeholder="Short title..." autofocus ' +
+                    'style="padding: 5px 5px; border: 2px solid #ccc; border-radius: 3px; background-color: #f8f8f8; font-size: 15px; margin-top: 10px; width: 350px; ">' + '</br>' +
+
+                    '<div style="padding-top: 15px; ">' +
+                    '<span style="font-size: 18px; font-weight: bold; font-family: Helvetica; ">Please elaborate on the issue encountered to help us replicate it: </span>' + '</br>' +
+                    '<textarea id="input-text" placeholder="Detailed description..." rows="15" cols="70" ' +
+                    'style="resize: none; padding: 5px 5px; border: 2px solid #ccc; border-radius: 3px; background-color: #f8f8f8; font-size: 15px; margin: 10px 0; ">' +
+                    '</textarea>' + '</br>' +
+                    '</div>' +
+
+                    '<button id="submit-form-submit-btn" type="submit" form="form1" value="Submit" ' +
+                    'style="background-color: #4CAF50; border: none; color: white; padding: 12px 25px; text-decoration: none; display: inline-block; font-size: 17px; cursor: pointer ">' +
+                    'Submit</button></form></div>';
+
+
+                document.getElementById("submit-form-modal").appendChild(modalBackground);
+                document.getElementById("submit-form-modal").appendChild(formWrapper);
+
+                // add eventhandler for form submit
+                document.getElementById("form1").addEventListener("submit", submitForm);
+            }
+
+
+            function submitForm(event) {
+                // Stop the form from submitting since we’re handling that with AJAX.
+                event.preventDefault();
+
+                message.title = document.getElementById("input-title").value;
+                message.text = document.getElementById("input-text").value;
+
+                // console.log("screenshot", screenshotImage);
+                // console.log("message", message);
+                // console.log("userAgentData", userAgentData);
+
+                window.open(`mailto:test@example.com?subject=subject&body= sajkvjcxbn ${screenshotImage} salvkljb`);
+
+            }
+
+            function close() {
+                var elem = document.querySelector('#submit-form-modal');
+                elem.parentNode.removeChild(elem);
+            }
+
+
+            function setErrors(error, url, line) {
+                console.log("e", error);
+                console.log("url", url);
+                console.log("line", line);
+            }
+
+
+            // init and run all the 💩💩💩
+            setTimeout(function () {
+                screenshot();
+                save2Image();
+                addForm();
+                // window.onerror = setErrors(error, url, line);
                 }, 500);
 
         </script>
